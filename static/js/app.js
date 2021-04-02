@@ -6,7 +6,6 @@ function optionChanged(valuename) {
     var filtervar = metadatavar.filter(sample => sample.id == valuename);
     var filtervar2 = filtervar[0];
 
-    // Bar chart
     var otu_ids = filtervar2.otu_ids;
     var ylabel = otu_ids.slice(0,10).map(otuID => `OTU ${otuID}`).reverse();
 
@@ -16,6 +15,12 @@ function optionChanged(valuename) {
     var otu_labels = filtervar2.otu_labels;
     var hovertext = otu_labels.slice(0,10).reverse();
 
+    var otu_ids2 = filtervar2.otu_ids;
+    var otu_labels2 = filtervar2.otulabels;
+    var sample_values2 = filtervar2.sample_values;
+
+
+    // Bar chart
     var bargraph = {
         x: xlabel, 
         y: ylabel,
@@ -30,13 +35,8 @@ function optionChanged(valuename) {
     };
 
     Plotly.newPlot("bar", data, layout);
-    });
 
-    // Bubble chart
 
-    var otu_ids2 = filtervar2.otu_ids;
-    var otu_labels2 = filtervar2.otulabels;
-    var sample_values2 = filtervar2.sample_values;
 
 
     var bubblechart = {
@@ -58,8 +58,7 @@ function optionChanged(valuename) {
          size: sample_values,
          color: otu_ids,
          colorscale: "Earth"
-
-    }
+        }
 }
 
 ];
@@ -67,7 +66,11 @@ function optionChanged(valuename) {
 Plotly.newPlot("bubble", bubblechart2, bubblechart);
 
 
-};
+
+    
+    })};
+
+
 
 function samplenames() {
     d3.json("samples.json").then((incomingdata) => {
